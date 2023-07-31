@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block container %}
+{% if user.is_authenticated %}
+
+<style>
+ th,tr {
+ text-align: center;
+ }
+  li{
+      margin-bottom:15px;
+      }
+      tr.pointer {
+      cursor: pointer;
+      }
+
+</style>
+<h5 style="text-align:center; font-weight:600; margin-bottom:30px;">Регистрация приказов и распоряжений 2023 год</h5>
+
+<form class="form-inline" action="{% url 'filter'%}" method="get">
+              <div class="input-group mb-3" >
+                <input type="text" class="form-control" placeholder="Введите запрос" aria-label="Введите запросe" name="q">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+              </div>
+          </form>
+
+
+<form  method="post" action="{% url 'filter' %}" >
+    {% csrf_token %}
+<!--<input class="btn btn-success" type="submit" value="Поиск">-->
+
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr  class="table-light">
+          <th>Порядковый номер</th>
+          <th>Дата регистрации приказа</th>
+          <th>Краткое содержание</th>
+          <th>Ответственный за подготовку приказа</th>
+        </tr>
+      </thead>
+      <tbody  href = "{% url 'list' %}">
+          {% for i in pages%}
+         <tr class="pointer" onclick="document.location = '{% url 'detail' i.pk %}';">
+          <th scope="row">{{i.npp}}</th>
+          <td>{{i.dateReg}}</td>
+
+          <td>{{i.content}}</td>
+          <td>{{i.executor}}</td>
+          </tr>
+          {% endfor %}
+          {% for i in pages0%}
+         <tr class="pointer" onclick="document.location = '{% url 'detail' i.pk %}';">
+         <th scope="row">{{i.npp}}</th>
+          <td>{{i.dateReg}}</td>
+          <td>{{i.content}}</td>
+          <td>{{i.executor}}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+</form>
+<div class="row">
+  <div class="col" style="text-align:center">
+  {% if pages %}
+      {% include 'pagination.html' with page=pages  %}
+  {% elif pages0 %}
+      {% include 'pagination.html' with page=pages0  %}
+  {% endif %}
+  </div>
+    <div class="col-2    exportcsv"><a  href="{% url 'exportcsv' %}?{{request.GET.urlencode}}" style="">
+        <button type="button" class="btn btn-outline-success">Export to CSV</button></a></div>
+
+  </div>
+
+
+{% endif %}
+
+{% endblock %}

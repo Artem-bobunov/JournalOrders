@@ -1,0 +1,36 @@
+{% extends "bases.html" %}
+
+{% block container %}
+<style>
+  .btn {
+margin-top:20px;
+    padding: 10px 20px 10px 20px;
+    font-size:16px;
+    background-color:#71BA51;
+    border-color:#71BA51;
+    --bs-btn-hover-bg:#71BA51;
+    --bs-btn-hover-border-color: #71BA51;
+  }
+</style>
+<div >
+	<div class="col" style="margin-left:300px;margin-top:250px">
+		<p style="margin-left:170px">
+		  <img src="http://volbti.ru/wp-content/uploads/elementor/thumbs/logo2-p5d9eaa7gi9uqo9ml9dzvwkrik8an1pg2u3c1qg0ju.png" alt="logo">
+		</p>
+		<div class="row">
+		  <h2 style="font-size:16px; text-align:center;">Государственное бюджетное учреждение Волгоградской области <br>«Центр государственной кадастровой оценки»</h2>
+		</div>
+		<div class="row">
+		  <h3 style="font-size:18px; text-align:center;font-weight:600;">Регистрация приказов и распоряжений за 2023 год</h3>
+		</div>
+
+		<div class="row" style="margin-left:150px">
+			<button type="button" class="btn btn-primary"><a style="color:white;text-decoration:none" href="{% url 'login'%}">Авторизация</a></button>
+		</div>
+
+
+
+</div></div>
+
+
+{% endblock %}

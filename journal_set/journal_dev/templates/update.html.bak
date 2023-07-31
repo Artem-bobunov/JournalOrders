@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block container %}
+{% if user.is_superuser %}
+
+<style>
+.big {
+   background: #ccc;
+   height: 300px;
+}
+
+.btn {
+   font-size: 14px;
+}
+
+.box {
+   background: lightgreen;
+   height: 40px;
+}
+}
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+</style>
+<script>
+    var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}
+</script>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Редактирование документа</h5>
+    </div>
+    <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <ul class="list-group" >
+                    <!--<li class="list-group-item"><h6>Номер Входящий</h6> {{form.numberInput}}</li>-->
+                 <li class="list-group-item"><b>Дата регистрации приказа</b> {{form.dateReg}}</li>
+                  <li class="list-group-item"><b>Краткое содержание</b>{{form.content}}</li>
+                  <li class="list-group-item"><b>Исполнитель</b>{{form.executor}}</li>
+            </ul>
+            <center><button type="submit" class="btn btn-success mt-2">Сохранить</button></center>
+        </form>
+    </div>
+</div>
+{% endblock %}

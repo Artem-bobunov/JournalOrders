@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block container %}
+{% if user.is_authenticated %}
+
+<style>
+td,th {
+text-align:center;
+}
+</style>
+<form  method="post">
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Документ № {{details.npp}}</h5>
+    </div>
+    <div class="card-body">
+            {% csrf_token %}
+<table class="table table-bordered table-sm table-hover">
+    <thead  >
+    <tr class = "table-secondary">
+    <th> Порядковый номер</th>
+    <th>Дата регистрации приказа</th>
+    <th>Краткое содержание</th>
+    <th>Ответственный за исполнение приказа</th>
+    </tr>
+    </thead>
+  <tbody>
+      <td>{{details.npp}}</td>
+      <td>{{details.dateReg}}</td>
+      <td>{{details.content}}</td>
+      <td>{{details.executor}}</td>
+  </tbody>
+</table>
+
+        {% if n1 == n2   %}
+
+             {% if pg  %}
+              <center><a class="btn btn-warning mt-2" href="{% url 'marks' details.pk %}" >Подписать</a ></center>
+             {% endif%}
+         {% endif%}
+
+
+
+      {% if user.is_superuser %}
+          <center><a class="btn btn-warning mt-2" href="{% url 'update' details.pk %}">Редактировать</a ></center>
+      {%endif%}
+
+    </div>
+    </div>
+</form>
+{% endblock %}

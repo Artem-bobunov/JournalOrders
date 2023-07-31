@@ -1,0 +1,43 @@
+{% extends "bases.html" %}
+
+{% block title %}Вход в систему{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block container %}
+<style>
+  .btn {
+margin-top:20px;
+    padding: 10px 25px 10px 25px;
+    font-size:16px;
+    background-color:#71BA51;
+    border-color:#71BA51;
+    --bs-btn-hover-bg:#71BA51;
+    --bs-btn-hover-border-color: #71BA51;
+.ramka {
+  border: 1px solid #71BA51;
+}
+  }
+</style>
+<div class="position-absolute top-50 start-50 translate-middle" style="box-shadow: 1px 1px 10px #bdc3c7; padding:50px 50px; border-radius:5px; margin-top:200px; margin-left:400px" >
+    <div >
+      <h2 style="font-size:20px; text-align:center;font-weight:600; padding: 0 0 10px 0; ">Авторизация</h2>
+		  <div class="row">
+			<form method="post" action="{% url 'login' %}" >
+			  {% csrf_token %}
+
+			  <div class="mb-3" >
+				{{ form.username|as_crispy_field }}
+			  </div>
+			  <div>
+				{{ form.password|as_crispy_field }}
+			  </div>
+			  <div class="text-center">
+				<button type="submit" class="btn btn-primary" style="margin-top: 25px;">Войти</button>
+			  </div>
+			</div>
+
+        </form>
+       </div>
+    </div>
+</div>
+{% endblock %}
